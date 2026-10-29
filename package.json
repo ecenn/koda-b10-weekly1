@@ -1,0 +1,29 @@
+{
+  "name": "koda-b10-weekly1",
+  "version": "1.0.0",
+  "description": "ordering food system based on secbowl menu",
+  "homepage": "https://github.com/ecenn/koda-b10-weekly1#readme",
+  "bugs": {
+    "url": "https://github.com/ecenn/koda-b10-weekly1/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecenn/koda-b10-weekly1.git"
+  },
+  "license": "MIT",
+  "author": "Jason Felix",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.mjs",
+    "lint": "eslint .",
+    "fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0"
+  }
+}
