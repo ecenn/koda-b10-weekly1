@@ -1,12 +1,11 @@
-import * as readline from 'node:readline/promises';
-import { stdin as input, stdout as output } from 'node:process';
-
-const rl = readline.createInterface({input, output});
-
-// orders
-let orders = [];
+import { rl } from "./utils/interface.mjs";
+import { orders } from "./utils/state.mjs";
+import { menu } from "./lib/menu.mjs";
+import { keranjang } from "./lib/cart.mjs";
+import { riwayat } from "./lib/history.mjs";
 
 // home
+
 async function main() { 
   while(true) {
     console.log(`
