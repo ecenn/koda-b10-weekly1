@@ -325,7 +325,7 @@ async function riwayat() {
 
 function listInvoice(isi) {
   const nomor = invoices.length + 1
-  const invoice = `\n  #INV/${nomor.toString().padStart(4, "0")}\n  | ${"-".repeat(77)} | ${"-".repeat(10)} |\n` + isi
+  const invoice = `\n  #INV/${nomor.toString().padStart(4, "0")}\n  | ${"-".repeat(77)} | ${"-".repeat(10)} |` + isi
   invoices.push(invoice)
 }
 
