@@ -1,74 +1,10 @@
 import * as readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 
-const rl = readline.createInterface({input, output});
+import dataMenu from "./data/menu.json" with { type: "json" };
 
-// data menu
-const dataMenu = [
-  { id: 1, name: "B1G1 Black Pepper Chicken", price: 54500 },
-  { id: 2, name: "B1G1 Mongolian Chicken", price: 55500 },
-  { id: 3, name: "Kombo Kenyang 2", price: 93100 },
-  { id: 4, name: "Salted Egg Chicken Pedas Jeruk (Reguler)", price: 45200 },
-  { id: 5, name: "Mongolian Chicken (Reguler)", price: 36375 },
-  { id: 6, name: "B1G1 Kung Pao Chicken", price: 105000 },
-  { id: 7, name: "Salted Egg Chicken Polos (Reguler)", price: 53500 },
-  { id: 8, name: "Salted Egg Chicken Pedas Jeruk (Reguler)", price: 56500 },
-  { id: 9, name: "Paket 1 LITE Sambalado Chicken + 1 Es Teh Manis", price: 35350 },
-  { id: 10, name: "Paket 1 LITE SEC Polos + 1 Es Teh Manis", price: 38150 },
-  { id: 11, name: "Salted Egg Chips", price: 48025 },
-  { id: 12, name: "Chips Kombo Minum", price: 55600 },
-  { id: 13, name: "Chips Kombo Makan", price: 88000 },
-  { id: 14, name: "Chips Kombo Lengkap", price: 92250 },
-  { id: 15, name: "Salted Egg Chicken Polos", price: 53500 },
-  { id: 16, name: "Salted Egg Chicken Original", price: 53500 },
-  { id: 17, name: "Spicy Salted Egg Chicken", price: 56500 },
-  { id: 18, name: "Salted Egg Chicken Pedas Jeruk", price: 56500 },
-  { id: 19, name: "Salted Egg Chicken Founder's Signature", price: 53900 },
-  { id: 20, name: "Kung Pao Chicken", price: 48500 },
-  { id: 21, name: "Mongolian Chicken", price: 48500 },
-  { id: 22, name: "Black Pepper Chicken", price: 47500 },
-  { id: 23, name: "General Tso Chicken", price: 43900 },
-  { id: 24, name: "Sambalado Chicken", price: 46500 },
-  { id: 25, name: "Seckaligus", price: 75500 },
-  { id: 26, name: "Kombo 2 Sec Ori + 2 Es Teh Manis", price: 112500 },
-  { id: 27, name: "Kombo 2 Sec Polos + 2 Es Teh Manis", price: 112500 },
-  { id: 28, name: "Kombo 2 Sec Pedas Jeruk + 2 Es Teh Manis", price: 117500 },
-  { id: 29, name: "Kombo 2 Sec Spicy + 2 Es Teh Manis", price: 117500 },
-  { id: 30, name: "Kombo 2 SEC Founder's Signature + 2 Es Teh Manis", price: 113500 },
-  { id: 31, name: "Kombo 2 Mongolian Chicken + 2 Es Teh Manis", price: 104500 },
-  { id: 32, name: "LITE Salted Egg Chicken Polos", price: 41500 },
-  { id: 33, name: "LITE Salted Egg Chicken Original", price: 41500 },
-  { id: 34, name: "LITE Spicy Salted Egg Chicken", price: 44500 },
-  { id: 35, name: "LITE Salted Egg Chicken Pedas Jeruk", price: 44500 },
-  { id: 36, name: "LITE SEC Founder's Signature", price: 41900 },
-  { id: 37, name: "LITE Kung Pao Chicken", price: 39500 },
-  { id: 38, name: "LITE Mongolian Chicken", price: 39500 },
-  { id: 39, name: "LITE Black Pepper Chicken", price: 38500 },
-  { id: 40, name: "LITE General Tso Chicken", price: 37500 },
-  { id: 41, name: "LITE Sambalado Chicken", price: 37500 },
-  { id: 42, name: "Salted Egg Chicken Polos (Chicken Only)", price: 129500 },
-  { id: 43, name: "Salted Egg Chicken Original (Chicken Only)", price: 129500 },
-  { id: 44, name: "Spicy Salted Egg Chicken (Chicken Only)", price: 135500 },
-  { id: 45, name: "Salted Egg Chicken Pedas Jeruk (Chicken Only)", price: 135500 },
-  { id: 46, name: "SEC Founder's Signature (Chicken Only)", price: 129500 },
-  { id: 47, name: "Kungpao Chicken (Chicken only)", price: 119500 },
-  { id: 48, name: "Mongolian Chicken (Chicken only)", price: 121000 },
-  { id: 49, name: "General Tso Chicken (Chicken Only)", price: 112500 },
-  { id: 50, name: "Sambalado Chicken (Chicken Only)", price: 112500 },
-  { id: 51, name: "Black Pepper Chicken (Chicken Only)", price: 119500 },
-  { id: 52, name: "Telur Mata Sapi", price: 9500 },
-  { id: 53, name: "Nasi Putih", price: 9500 },
-  { id: 54, name: "Cabe Rawit (tanpa kecap)", price: 3000 },
-  { id: 55, name: "Telur Dadar", price: 9500 },
-  { id: 56, name: "Extra Salted Egg Sauce", price: 6500 },
-  { id: 57, name: "Cabe Rawit Kecap", price: 2000 },
-  { id: 58, name: "Iced Tea", price: 12000 },
-  { id: 59, name: "Sweet Iced Tea", price: 13000 },
-  { id: 60, name: "Es Sari Tebu Murni", price: 18000 },
-  { id: 61, name: "Iced Lemon Tea", price: 19000 },
-  { id: 62, name: "Es Sari Tebu Lemon", price: 21000 },
-  { id: 63, name: "Packaging Charge", price: 3500 },
-];
+
+const rl = readline.createInterface({input, output});
 
 let listMenu = `
 | ${"-".repeat(5)} | ${"-".repeat(50)} | ${"-".repeat(10)} |
@@ -295,7 +231,8 @@ async function bayar(tagihan, isi) {
 
 async function riwayat() {
   while (true) {
-    console.log(`  - Riwayat -`);
+    console.log(`
+  - Riwayat -`);
     if (invoices.length != 0) {
       console.log(`
   ${invoices.join("\n")}
@@ -325,7 +262,7 @@ async function riwayat() {
 
 function listInvoice(isi) {
   const nomor = invoices.length + 1;
-  const invoice = `\n  #INV/${nomor.toString().padStart(4, "0")}\n  | ${"-".repeat(77)} | ${"-".repeat(10)} |` + isi;
+  const invoice = `  #INV/${nomor.toString().padStart(4, "0")}\n  | ${"-".repeat(77)} | ${"-".repeat(10)} |` + isi;
   invoices.push(invoice);
 }
 
